@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jokes Home Page</title>
+  <style>
+    * {
+      border: 1px solid black;
+    }
+
+    header {
+      background-color: rgba(34, 37, 212, 0.973);
+      text-shadow: yellow;
+      color: rgb(255, 10, 10);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Jokes from behind the keyboard</h1>
+    </header>
+    <div id="filter">
+      <select name="joke-typ" id="joke-type"></select>
+    </div>
+    <div id="jokes-container">
+      <div id="joke-setup">What's the difference between a hippo and a zippo?</div>
+      <div id="joke-punch">One is really heavy, the other is a little lighter.</div>
+    </div>
+  </main>
+  <script>
+    let setup = document.querySelector('#joke-setup')
+    let punchline = document.querySelector('#joke-punch')
+
+    punchline.classList.add('hidden');
+  </script>
+</body>
+
+</html>
