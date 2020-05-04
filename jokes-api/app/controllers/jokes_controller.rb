@@ -1,19 +1,19 @@
 class JokesController < ApplicationController
   def index 
     @jokes = Joke.all 
-    render json: @jokes, include: [:ratings]
+    render json: @jokes, include: [:ratings, :author]
   end 
   def show 
     if params[:id]
       @joke = Joke.find(params[:id])
-      render json: @joke, include: [:ratings]
+      render json: @joke, include: [:ratings, :author]
     else 
       index() 
     end 
   end 
   def create 
-    if params[:setup] && params[:punchline] && params[:category]
-      @new_joke = Joke.new(setup: params[:setup], punchline: params[:punchline], category: params[:category])
+    if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
+      @new_joke = Joke.new(setup: params[:setup], punchline: params[:punchline], category: params[:category], author_id: params[:author_id])
       if @new_joke.save
         render json: @joke 
       else 
@@ -25,7 +25,7 @@ class JokesController < ApplicationController
   end 
   def update 
     if params[:id] 
-      if params[:setup] && params[:punchline] && params[:category]
+      if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
         @joke = Joke.find(params[:id])
         @joke.setup  = params[:setup]
         @joke.punchline = params[:punchline]
