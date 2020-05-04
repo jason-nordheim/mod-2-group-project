@@ -35,19 +35,21 @@
 
     </header>
 
+    <form method="POST">
+      <!-- filters will build upon each other -->
+      <label for="type">Select a category:</label>
+      <select name="type" id="joke-category" onchange="filterJokes()"></select> <!-- filters all jokes, by type -->
+      <label for="author">Select an author: </label>
+      <select name="author" id="joke-author"></select> <!-- filters all jokes, by author -->
+    </form>
 
+    <div id="joke-container">
+      <!-- This is where the jokes that are pupulated will go -->
 
-    <div id="jokes-container">
-      <div id="joke-category-container">
-        <h3><span id="joke-category-title">Category:</span><span id="joke-category-value"> Random</span></h3>
-      </div>
-      <div id="joke-setup">What's the difference between a hippo and a zippo?</div>
-      <div id="joke-punch">One is really heavy, the other is a little lighter.</div>
     </div>
 
-
   </main>
-  <script src="./scripts/index.js"></script>
+  <script src="./scripts/findJoke.js"></script>
 </body>
 
 </html>
