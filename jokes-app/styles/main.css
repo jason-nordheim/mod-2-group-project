@@ -1,0 +1,53 @@
+* {
+  font-family: 'Fauna One', serif;
+}
+
+#title {
+  text-align: center;
+  font-family: 'Inconsolata', monospace;
+}
+
+nav ul a {
+  text-decoration: none;
+}
+
+nav ul a:visited {
+  color: black;
+}
+
+nav ul a li {
+  list-style: none;
+  display: inline-flex;
+  padding: 10px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+nav {
+  border: 1px solid black;
+}
+
+
+/* nav bar without hover */
+nav ul a li {
+  min-width: 150px;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+/* Hovering over the nav bar */
+nav ul a li:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+#jokes-container {
+  border: 1px dashed red;
+  text-align: center;
+  margin: 10px 30px 15px 30px;
+}
+
+#joke-category-value {
+  color: rgb(100, 100, 100);
+}

@@ -4,47 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jokes Home Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fauna+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css">
+  <title>Random Joke</title>
 </head>
 
 <body>
   <main>
-
     <header>
-      <h1 id="title">Funnys from behind the keyboard</h1>
-
+      <h1>Jokes from behind the keyboard</h1>
       <nav>
         <ul>
-          <!-- Will (by default) display a random joke pulled from API -->
           <a href="./index.html">
+            <!-- Will (by default) display a random joke pulled from API -->
             <li>Home</li>
           </a>
           <a href="./newJoke.html">
-            <li>Rate a funny</li>
-          </a>
-          <!-- Will allow users to enter a new joke -->
-          <a href="./newJoke.html">
-            <li>Submit a funny</li>
+            <!-- Will allow users to enter a new joke -->
+            <li>New Joke</li>
           </a>
         </ul>
       </nav>
-
     </header>
-
+    <div id="filter">
+      <select name="joke-typ" id="joke-type"></select>
+    </div>
     <div id="jokes-container">
-      <div id="joke-category-container">
-        <h3><span id="joke-category-title">Category:</span><span id="joke-category-value"> Random</span></h3>
-      </div>
       <div id="joke-setup">What's the difference between a hippo and a zippo?</div>
       <div id="joke-punch">One is really heavy, the other is a little lighter.</div>
     </div>
-
-
   </main>
-  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
