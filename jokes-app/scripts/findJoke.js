@@ -1,53 +1,56 @@
+// Page Elements 
 const selectJokeCategory = document.querySelector("#joke-category")
 const selectJokeAuthor = document.querySelector("#joke-author")
 const jokeContainer = document.querySelector("#joke-container");
 
-/*  Startup tasks */
+let JOKES = [];
+initialize();
 
-fetch('http://localhost:3000/jokes')
-  .then(response => response.json())
-  .then(showJokes);
 
-fetch('http://localhost:3000/authors')
-  .then(response => response.json())
-  .then(showAuthors);
+//  Startup tasks 
+function initialize() {
+  fetchJokes();
+  fetchAuthors();
 
+}
+
+function fetchJokes() {
+  fetch('http://localhost:3000/jokes')
+    .then(response => response.json())
+    .then(saveJokes)
+}
+
+function fetchAuthors() {
+  fetch('http://localhost:3000/authors')
+    .then(response => response.json())
+    .then(showAuthors);
+}
+
+/* called when the select option is changed */
 function filterJokes() {
+  removeDisplayedJokes();
   let filter = getCategoryFilter();
-  const displayedJokes = document.getElementsByClassName("joke")
-  for (let i = displayedJokes.length - 1; i > 0; i--) {
-    const jokeDiv = displayedJokes[i];
-    const text = jokeDiv.children[0].innerText;
-    const match = text.search(`${filter}`);
-    console.log(match)
-    if (match == -1) { // matching failed 
-      console.log("removing ...", jokeDiv)
-      jokeContainer.removeChild(jokeDiv)
-    }
+  let filterdJokes = JOKES.filter(j => j.category == filter)
+  filterdJokes.forEach(j => displayJoke(j))
+}
+
+// helper function to remove any jokes that are currently displayed on the page
+function removeDisplayedJokes() {
+  let displayedJokes = document.getElementsByClassName('joke');
+  while (displayedJokes.length > 0) {
+    displayedJokes[0].remove();
   }
 }
 
-
+// function to get the filter selected by the end user 
 function getCategoryFilter() {
   return selectJokeCategory.children[selectJokeCategory.selectedIndex].value;
 }
 
-/* Function */
-function showJokes(jokes) {
-  // show the potential categories 
-  showCategories(jokes);
-  // checking to see if we need to filter 
-  if (selectJokeCategory.selectedIndex != 0) {
-    // show filtered jokes 
-    const filter = getCategoryFilter();
-    let filteredJokes = jokes.filter((joke) => joke.category == filter);
-    filteredJokes.forEach(j => displayJoke(j))
-  } else {
-    // show all jokes
-    jokes.forEach(j => displayJoke(j))
-  }
+function saveJokes(jokes) {
+  JOKES = jokes;
+  return JOKES;
 }
-
 
 function displayJoke(joke) {
   const jokeDiv = document.createElement("div")
@@ -71,10 +74,15 @@ function displayJoke(joke) {
 
 
 function showCategories(jokes) {
-  let categories = jokes.map(j => j.category);
-  console.log(categories)
+  // remove any existing categories 
+  while (selectJokeCategory.length > 0) {
+    selectJokeCategory.children[0].remove();
+  }
+
+  let categories = JOKES.map(j => j.category);
+  let uniqueCategories = makeUnique(categories);
   createOption(selectJokeCategory, "Show All"); // index 0 
-  categories.forEach((c) => createOption(selectJokeCategory, c));
+  uniqueCategories.forEach((c) => createOption(selectJokeCategory, c));
 }
 
 function createOption(parent, optionValue) {
@@ -87,4 +95,21 @@ function createOption(parent, optionValue) {
 
 function showAuthors(authors) {
   //filter 
+}
+
+function makeUnique(collection) {
+  let output = [];
+  for (let i = 0; i < collection.length; i++) {
+    // if this finds a match, this will not be null => truthy || if null => falsey 
+    let exists = false;
+    for (let j = 0; j < output.length; j++) {
+      if (collection[i] == output[j]) {
+        exists = true;
+      }
+    }
+    if (!exists) {
+      output.push(collection[i])
+    }
+  }
+  return output;
 }
