@@ -4,67 +4,82 @@ let AUTHORS = [];
 
 // get data 
 document.addEventListener('DOMContentLoaded', (event) => {
-  cacheJokes().then(renderCategories)
-  cacheAuthors().then(renderAuthors)
+  cacheJokes()
+    .then(cacheAuthors)
+    .then(renderCategories)
+    .then(renderAuthors)
+    .then(renderJokes);
 });
 
+async function cacheAuthors() {
+  await fetch('http://localhost:3000/authors')
+    .then(response => response.json())
+    .then((a) => AUTHORS = a)
+}
+async function cacheJokes() {
+  await fetch('http://localhost:3000/jokes')
+    .then(response => response.json())
+    .then((j) => JOKES = j)
+}
+
+
+function renderFilterSubmitButton() {
+  const button = document.createElement("button");
+  button.addEventListener('onclick', filterByAuthorAndCategory);
+  button.innerText = "Filter";
+  queryJokesForm.appendChild(button);
+}
+
+function filterByAuthorAndCategory() {
+  console.log('hello')
+  // get the category
+  // get the author 
+  // filter our the jokes that don't meet that criteria 
+}
+
 function renderAuthors() {
-  const label = createLabel('author', 'Authors: ', 'author');
-  const select = document.createElement('select');
-  AUTHORS.forEach((author) => {
-    const option = createOptionElement(author.name, author.id, 'author');
-    select.appendChild(option);
+  const ul = document.createElement('ul');
+  const h3 = document.createElement('h3');
+  h3.innerText = 'Filter Authors:';
+  AUTHORS.forEach(a => {
+    const li = document.createElement('li');
+    li.onclick = filterJokes;
+    li.classList.add('author')
+    li.value = a.id;
+    li.innerText = `${a.name}`;
+    ul.appendChild(li);
   })
-  queryJokesForm.appendChild(label);
-  queryJokesForm.appendChild(select)
+  const filterSection = document.querySelector('#filter');
+  filterSection.appendChild(h3)
+  filterSection.appendChild(ul);
+}
+
+function filterJokes() {
+  console.log('i am filtering jokes')
+}
+
+function renderJokes() {
+  console.log('i am rendering jokes')
 }
 
 function renderCategories() {
-  const uniqueCategories = makeUnique(JOKES.map(j => j.category));
-  const select = document.createElement('select');
-  const label = createLabel('category', 'Categories: ', 'category')
-  uniqueCategories.forEach((c) => {
-    const option = createOptionElement(c, c, c);
-    select.appendChild(option)
+  const ul = document.createElement('ul');
+  const h3 = document.createElement('h3');
+  h3.innerText = 'Filter Categories:';
+  const uniqueCategories = makeUnique(JOKES.map(j => j.category))
+  uniqueCategories.forEach(c => {
+    const li = document.createElement('li');
+    li.onclick = filterJokes;
+    li.classList.add('category')
+    li.value = c;
+    li.innerText = c
+    ul.appendChild(li);
   })
-  queryJokesForm.appendChild(label)
-  queryJokesForm.appendChild(select)
+  const filterSection = document.querySelector('#filter');
+  filterSection.appendChild(h3)
+  filterSection.appendChild(ul);
 }
 
-function addCategoryOnChangeEvent(event) {
-  console.log(event);
-}
-
-function renderJokes() {}
-
-
-function cacheAuthors() {
-  return fetch('http://localhost:3000/authors')
-    .then(response => response.json())
-    .then((a) => AUTHORS = a);
-}
-
-function cacheJokes() {
-  return fetch('http://localhost:3000/jokes')
-    .then(response => response.json())
-    .then((j) => JOKES = j);
-}
-
-function createOptionElement(text, id, htmlFor) {
-  const option = document.createElement("option");
-  option.text = text;
-  option.id = id;
-  option.htmlFor = htmlFor;
-  return option;
-}
-
-function createLabel(name, text, htmlFor) {
-  const label = document.createElement('label')
-  label.name = name;
-  label.htmlFor = htmlFor;
-  label.innerText = text;
-  return label;
-}
 
 function makeUnique(collection) {
   let output = [];
