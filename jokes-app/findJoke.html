@@ -35,18 +35,9 @@
 
     </header>
 
-    <form method="POST">
-      <!-- filters will build upon each other -->
-      <label for="type">Select a category:</label>
-      <select name="type" id="joke-category" onchange="filterJokes()"></select> <!-- filters all jokes, by type -->
-      <label for="author">Select an author: </label>
-      <select name="author" id="joke-author"></select> <!-- filters all jokes, by author -->
+    <form id="query-jokes" method="POST" action="#">
+
     </form>
-
-    <div id="joke-container">
-      <!-- This is where the jokes that are pupulated will go -->
-
-    </div>
 
   </main>
   <script src="./scripts/findJoke.js"></script>
