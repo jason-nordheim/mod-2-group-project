@@ -7,6 +7,11 @@
   font-family: 'Inconsolata', monospace;
 }
 
+#rating-form-container {
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
 nav ul a {
   color: yellow;
   text-decoration: none;
