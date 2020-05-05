@@ -8,19 +8,22 @@
 }
 
 nav ul a {
+  color: yellow;
   text-decoration: none;
 }
 
 nav ul a:visited {
-  color: black;
+  color: yellow;
+  text-decoration: none;
 }
 
 nav ul a li {
   list-style: none;
   display: inline-flex;
   padding: 10px 10px;
-  border: 1px solid black;
+  box-shadow: 3px 3px rgb(200, 005, 005);
   border-radius: 3px;
+  background-color: rgba(0, 0, 204, 0.897);
 }
 
 nav {
@@ -39,7 +42,10 @@ nav ul a li {
 
 /* Hovering over the nav bar */
 nav ul a li:hover {
-  background-color: rgb(100, 100, 100);
+  background-color: rgba(200, 5, 5, 0.9);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 3px 3px rgb(195, 192, 0);
+  transition: linear 0.2s;
 }
 
 #jokes-container {
