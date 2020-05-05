@@ -12,12 +12,12 @@ class RatingsController < ApplicationController
     end 
   end 
   def create 
-    if params[:setup] && params[:punchline] && params[:category]
-      @rating = Joke.new(setup: params[:setup], punchline: params[:punchline], category: params[:category])
+    if params[:rating] && params[:joke_id]
+      @rating = Rating.new(rating: params[:rating], joke_id: params[:joke_id])
       if @rating.save
-        render json: @joke 
+        redirect_to "http://localhost:3000/ratings"
       else 
-        render text: "Save failed"
+        render text: "Rating failed"
       end 
     else
       render text: "Invalid number of arguments+"
