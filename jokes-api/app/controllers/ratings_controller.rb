@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
     if params[:rating] && params[:joke_id]
       @rating = Rating.new(rating: params[:rating], joke_id: params[:joke_id])
       if @rating.save
-        redirect_to "http://localhost:3000/ratings"
+        redirect_to "http://localhost:3001/index"
       else 
         render text: "Rating failed"
       end 

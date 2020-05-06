@@ -1,90 +1,186 @@
-const selectJokeCategory = document.querySelector("#joke-category")
-const selectJokeAuthor = document.querySelector("#joke-author")
-const jokeContainer = document.querySelector("#joke-container");
+const queryJokesForm = document.querySelector('#query-jokes');
+let JOKES = [];
+let AUTHORS = [];
 
-/*  Startup tasks */
+// get data 
+document.addEventListener('DOMContentLoaded', (event) => {
+  cacheJokes()
+    .then(cacheAuthors)
+    .then(renderCategories)
+    .then(renderAuthors)
+    .then(renderJokes);
+});
 
-fetch('http://localhost:3000/jokes')
-  .then(response => response.json())
-  .then(showJokes);
+async function cacheAuthors() {
+  await fetch('http://localhost:3000/authors')
+    .then(response => response.json())
+    .then((a) => AUTHORS = a)
+}
+async function cacheJokes() {
+  await fetch('http://localhost:3000/jokes')
+    .then(response => response.json())
+    .then((j) => JOKES = j)
+}
 
-fetch('http://localhost:3000/authors')
-  .then(response => response.json())
-  .then(showAuthors);
 
-function filterJokes() {
-  let filter = getCategoryFilter();
-  const displayedJokes = document.getElementsByClassName("joke")
-  for (let i = displayedJokes.length - 1; i > 0; i--) {
-    const jokeDiv = displayedJokes[i];
-    const text = jokeDiv.children[0].innerText;
-    const match = text.search(`${filter}`);
-    console.log(match)
-    if (match == -1) { // matching failed 
-      console.log("removing ...", jokeDiv)
-      jokeContainer.removeChild(jokeDiv)
+function renderFilterSubmitButton() {
+  const button = document.createElement("button");
+  button.addEventListener('onclick', filterByAuthorAndCategory);
+  button.innerText = "Filter";
+  queryJokesForm.appendChild(button);
+}
+
+function renderAuthors() {
+  const ul = document.createElement('ul');
+  const h3 = document.createElement('h3');
+  h3.innerText = 'Filter Authors:';
+  AUTHORS.forEach(a => {
+    const li = document.createElement('li');
+    li.onclick = filterJokes;
+    li.classList.add('author')
+    li.value = a.id;
+    li.innerText = `${a.name}`;
+    ul.appendChild(li);
+  })
+  const filterSection = document.querySelector('#filter');
+  filterSection.appendChild(h3)
+  filterSection.appendChild(ul);
+}
+
+function filterJokes(event) {
+  // re-render jokes 
+  renderJokes();
+  // perform the filter 
+  let filter = event.target.classList[0]; // either "author" or "category "
+  let filterValue = event.target.innerText;
+  const displayedJokes = document.getElementsByClassName('displayed-joke');
+  const relatedAuthor = AUTHORS.find(a => a.name == filterValue);
+  let i = displayedJokes.length - 1;
+  while (i > -1) {
+    if (filter == "author") {
+      // todo 
+      // 1) get joke id from nested form '
+      const joke_id = getJokeIdFromDisplayedJokeDiv(displayedJokes[i])
+      // 2) find related author 
+      const related_joke_ids = JOKES.filter(joke => joke.author_id == relatedAuthor.id);
+      const isRelated = related_joke_ids.find(jokeID => joke_id)
+      if (isRelated == undefined) {
+        displayedJokes[i].remove();
+      }
+      // 3) find all the jokes related to that author 
+      // 4) remove any jokes that are not part of that data set 
+    } else if (filter == "category") {
+      let elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
+      if (elementCategory != filterValue) {
+        displayedJokes[i].remove();
+      }
+    }
+    i--;
+  }
+  setFilterClass(event.target)
+}
+
+function setFilterClass(sourceElement) {
+  removeAnySetFilterClass();
+  sourceElement.classList.add('current-filter');
+}
+
+function removeAnySetFilterClass() {
+  const authors = document.getElementsByClassName('author');
+  for (let i = 0; i < authors.length; i++) {
+    const element = authors[i];
+    element.classList.remove('current-filter');
+  }
+
+  const categories = document.getElementsByClassName('category');
+  for (let i = 0; i < categories.length; i++) {
+    const element = categories[i];
+    element.classList.remove('current-filter')
+  }
+}
+
+function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
+  return HTMLDiv.childNodes[3].childNodes[4].value;
+}
+
+function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
+  return HTMLDiv.childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerText;
+}
+
+
+
+function renderJokes() {
+  const jokesContainer = document.querySelector('#jokes-container');
+  jokesContainer.childNodes.forEach(node => node.remove());
+  JOKES.forEach(j => {
+    const container = document.createElement('div');
+    container.classList.add('displayed-joke')
+    const category = document.createElement('div')
+    category.innerHTML = `<p class='joke-category'><b>Category:<b>${j.category}</p>`;
+    container.appendChild(category);
+
+    const setup = document.createElement('div');
+    setup.innerHTML = `<p class='joke-setup'><b>Setup:</b>${j.setup}</p>`;
+    container.appendChild(setup);
+
+    const punchline = document.createElement('div');
+    punchline.innerHTML = `<p class='joke-punchline'><b>Punchline:</b>${j.punchline}</p>`
+    container.appendChild(punchline);
+
+    const ratingForm = createRatingForJoke(j);
+    container.appendChild(ratingForm);
+
+    jokesContainer.appendChild(container);
+  })
+}
+
+
+
+
+
+function createRatingForJoke(joke) {
+  const form = document.createElement('form');
+  form.action = "http://localhost:3000/ratings";
+  form.method = "POST";
+  form.innerHTML = `<label for="rating">Rate This Joke</label>
+  <input min="1" max="5" type="number" name="rating" class="rating" for="rating" " />
+  <input type="hidden" name="joke_id" value="${joke.id}"> 
+  <input type="submit" value="Click Here!">`;
+  return form;
+}
+
+function renderCategories() {
+  const ul = document.createElement('ul');
+  const h3 = document.createElement('h3');
+  h3.innerText = 'Filter Categories:';
+  const uniqueCategories = makeUnique(JOKES.map(j => j.category))
+  uniqueCategories.forEach(c => {
+    const li = document.createElement('li');
+    li.onclick = filterJokes;
+    li.classList.add('category')
+    li.value = c;
+    li.innerText = c
+    ul.appendChild(li);
+  })
+  const filterSection = document.querySelector('#filter');
+  filterSection.appendChild(h3)
+  filterSection.appendChild(ul);
+}
+
+
+function makeUnique(collection) {
+  let output = [];
+  for (let i = 0; i < collection.length; i++) {
+    // if this finds a match, this will not be null => truthy || if null => falsey 
+    let exists = false;
+    for (let j = 0; j < output.length; j++) {
+      if (collection[i] == output[j]) {
+        exists = true;
+      }
+    }
+    if (!exists) {
+      output.push(collection[i])
     }
   }
-}
-
-
-function getCategoryFilter() {
-  return selectJokeCategory.children[selectJokeCategory.selectedIndex].value;
-}
-
-/* Function */
-function showJokes(jokes) {
-  // show the potential categories 
-  showCategories(jokes);
-  // checking to see if we need to filter 
-  if (selectJokeCategory.selectedIndex != 0) {
-    // show filtered jokes 
-    const filter = getCategoryFilter();
-    let filteredJokes = jokes.filter((joke) => joke.category == filter);
-    filteredJokes.forEach(j => displayJoke(j))
-  } else {
-    // show all jokes
-    jokes.forEach(j => displayJoke(j))
-  }
-}
-
-
-function displayJoke(joke) {
-  const jokeDiv = document.createElement("div")
-  jokeDiv.classList.add("joke")
-
-  let category = document.createElement("p");
-  category.innerHTML = `<b>Category: </b> ${joke.category}`
-
-  let setup = document.createElement("p");
-  setup.innerHTML = `<b>Setup: </b> ${joke.setup}`;
-
-  let punchline = document.createElement("p");
-  punchline.innerHTML = `<b>Punchline: </b> ${joke.punchline}`;
-
-  jokeDiv.appendChild(category);
-  jokeDiv.appendChild(setup);
-  jokeDiv.appendChild(punchline);
-
-  jokeContainer.appendChild(jokeDiv);
-}
-
-
-function showCategories(jokes) {
-  let categories = jokes.map(j => j.category);
-  console.log(categories)
-  createOption(selectJokeCategory, "Show All"); // index 0 
-  categories.forEach((c) => createOption(selectJokeCategory, c));
-}
-
-function createOption(parent, optionValue) {
-  let categoryOption = document.createElement('option')
-  categoryOption.selected = false;
-  categoryOption.value = optionValue;
-  categoryOption.label = optionValue;
-  parent.appendChild(categoryOption);
-}
-
-function showAuthors(authors) {
-  //filter 
+  return output;
 }

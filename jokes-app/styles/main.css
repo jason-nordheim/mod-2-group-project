@@ -7,6 +7,11 @@
   font-family: 'Inconsolata', monospace;
 }
 
+#rating-form-container {
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
 nav ul a {
   color: yellow;
   text-decoration: none;
@@ -56,4 +61,19 @@ nav ul a li:hover {
 
 #joke-category-value {
   color: rgb(100, 100, 100);
+}
+
+.category,
+.author {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: blue;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: white;
+  font-size: 0.8em;
+}
+
+.current-filter {
+  background-color: purple;
 }

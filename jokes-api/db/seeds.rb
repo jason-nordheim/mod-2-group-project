@@ -1,5 +1,9 @@
 
 default_user = Author.create(name: 'default')
+colbert = Author.create(name: 'Steven Colbert')
+dad = Author.create(name: "Dad")
+
+dadJokesAPI = Author.create(name: 'Dad Jokes API'); 
 
 
 Joke.create(category: "general", setup: 'What did Michael Jackson name his denim store?',punchline: 'Billy Jeans', author_id: default_user.id) 

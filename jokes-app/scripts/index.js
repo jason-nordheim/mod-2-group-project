@@ -20,17 +20,17 @@ function displayRandomJoke(joke) {
     console.log(joke)
     categoryValue.innerText = joke.category
     authorValue.innerText = joke.author.name
-    jokeSetup.innerText = joke.setup
-    jokePunchline.innerText = joke.punchline
+    jokeSetup.innerHTML = `<b>Setup: </b>${joke.setup}`
+    jokePunchline.innerHTML = `<b>Punchline: </b>${joke.punchline}`
     rateThisJoke(joke.id)
 }
 
-function rateThisJoke (jokeID) {
+function rateThisJoke(jokeID) {
     let idLocation = document.querySelector('form')
     let jokeIdInput = document.createElement("input")
     jokeIdInput.type = "hidden"
     jokeIdInput.name = "joke_id"
     jokeIdInput.value = `${jokeID}`
-    idLocation.append(jokeIdInput)   
-    console.log(jokeIdInput) 
+    idLocation.append(jokeIdInput)
+    console.log(jokeIdInput)
 }
