@@ -55,6 +55,8 @@ function filterJokes(event) {
   // perform the filter 
   let filter = event.target.classList[0]; // either "author" or "category "
   let filterValue = event.target.innerText;
+  console.log('filter == ', filter)
+  console.log('filterValue == ', filterValue)
   const displayedJokes = document.getElementsByClassName('displayed-joke');
   const relatedAuthor = AUTHORS.find(a => a.name == filterValue);
   let i = displayedJokes.length - 1;
@@ -67,12 +69,9 @@ function filterJokes(event) {
         displayedJokes[i].remove();
       }
     } else if (filter == "category") {
-      let elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
+      const elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
       if (elementCategory != filterValue) {
-        console.log('remmoging', displayedJokes[i])
         displayedJokes[i].remove();
-      } else {
-        console.log('leaving ', displayedJokes[i])
       }
     }
     i--;
@@ -105,7 +104,9 @@ function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
 // returns the joke category from the div element containing a joke 
 // by parsing its DOM nodes 
 function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
-  return HTMLDiv.childNodes[0].childNodes[0].childNodes[1];
+  const text = HTMLDiv.childNodes[0].childNodes[0].innerText;
+  let output = text.slice(10, text.length);
+  return output;
 }
 
 
