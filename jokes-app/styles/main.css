@@ -1,5 +1,7 @@
 * {
   font-family: 'Fauna One', serif;
+  background-color: black;
+  color: white;
 }
 
 #title {
@@ -26,13 +28,17 @@ nav ul a li {
   list-style: none;
   display: inline-flex;
   padding: 10px 10px;
-  box-shadow: 3px 3px rgb(200, 005, 005);
+  box-shadow: 3px 3px rgba(17, 59, 4, 0.897);
   border-radius: 3px;
-  background-color: rgba(0, 0, 204, 0.897);
+  background-color: rgba(83, 228, 39, 0.897);
+  color: black;
+  margin-right: 5px;
 }
 
 nav {
   border: 1px solid black;
+  border-top: 1px dashed white;
+  border-bottom: 1px dashed white;
 }
 
 
@@ -47,10 +53,10 @@ nav ul a li {
 
 /* Hovering over the nav bar */
 nav ul a li:hover {
-  background-color: rgba(200, 5, 5, 0.9);
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 3px 3px rgb(195, 192, 0);
   transition: linear 0.2s;
+  box-shadow: none;
+  background-color: rgba(17, 59, 4, 1);
+  color: rgba(58, 212, 11, 0.897);
 }
 
 #jokes-container {
@@ -67,13 +73,33 @@ nav ul a li:hover {
 .author {
   display: inline-block;
   padding: 10px 15px;
-  background-color: blue;
+  background-color: rgba(83, 228, 39, 0.897);
+  color: black;
   border-radius: 5px;
   margin-right: 10px;
-  color: white;
   font-size: 0.8em;
 }
 
+.category:hover,
+.author:hover {
+  background-color: rgba(17, 59, 4, 1);
+  color: rgba(58, 212, 11, 0.897);
+  transition: linear 0.2s;
+
+}
+
 .current-filter {
-  background-color: purple;
+  background-color: white;
+  color: black;
+}
+
+#authors h3 {}
+
+#query-jokes {
+  margin: 20px 20px;
+}
+
+/* The page header */
+main h2 {
+  text-align: center;
 }
