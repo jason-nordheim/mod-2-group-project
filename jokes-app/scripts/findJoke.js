@@ -50,6 +50,8 @@ function renderAuthors() {
 function filterJokes(event) {
   // re-render jokes 
   renderJokes();
+  setFilterClass(event.target)
+
   // perform the filter 
   let filter = event.target.classList[0]; // either "author" or "category "
   let filterValue = event.target.innerText;
@@ -58,26 +60,23 @@ function filterJokes(event) {
   let i = displayedJokes.length - 1;
   while (i > -1) {
     if (filter == "author") {
-      // todo 
-      // 1) get joke id from nested form '
       const joke_id = getJokeIdFromDisplayedJokeDiv(displayedJokes[i])
-      // 2) find related author 
       const related_joke_ids = JOKES.filter(joke => joke.author_id == relatedAuthor.id);
       const isRelated = related_joke_ids.find(jokeID => joke_id)
       if (isRelated == undefined) {
         displayedJokes[i].remove();
       }
-      // 3) find all the jokes related to that author 
-      // 4) remove any jokes that are not part of that data set 
     } else if (filter == "category") {
       let elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
       if (elementCategory != filterValue) {
+        console.log('remmoging', displayedJokes[i])
         displayedJokes[i].remove();
+      } else {
+        console.log('leaving ', displayedJokes[i])
       }
     }
     i--;
   }
-  setFilterClass(event.target)
 }
 
 function setFilterClass(sourceElement) {
@@ -103,8 +102,10 @@ function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
   return HTMLDiv.childNodes[3].childNodes[4].value;
 }
 
+// returns the joke category from the div element containing a joke 
+// by parsing its DOM nodes 
 function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
-  return HTMLDiv.childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerText;
+  return HTMLDiv.childNodes[0].childNodes[0].childNodes[1];
 }
 
 
@@ -116,15 +117,15 @@ function renderJokes() {
     const container = document.createElement('div');
     container.classList.add('displayed-joke')
     const category = document.createElement('div')
-    category.innerHTML = `<p class='joke-category'><b>Category:<b>${j.category}</p>`;
+    category.innerHTML = `<p class='joke-category'><b>Category: </b>${j.category}</p>`;
     container.appendChild(category);
 
     const setup = document.createElement('div');
-    setup.innerHTML = `<p class='joke-setup'><b>Setup:</b>${j.setup}</p>`;
+    setup.innerHTML = `<p class='joke-setup'><b>Setup: </b>${j.setup}</p>`;
     container.appendChild(setup);
 
     const punchline = document.createElement('div');
-    punchline.innerHTML = `<p class='joke-punchline'><b>Punchline:</b>${j.punchline}</p>`
+    punchline.innerHTML = `<p class='joke-punchline'><b>Punchline: </b>${j.punchline}</p>`
     container.appendChild(punchline);
 
     const ratingForm = createRatingForJoke(j);
@@ -145,7 +146,7 @@ function createRatingForJoke(joke) {
   form.innerHTML = `<label for="rating">Rate This Joke</label>
   <input min="1" max="5" type="number" name="rating" class="rating" for="rating" " />
   <input type="hidden" name="joke_id" value="${joke.id}"> 
-  <input type="submit" value="Click Here!">`;
+  <input class='btn' type="submit" value="Click Here!">`;
   return form;
 }
 
