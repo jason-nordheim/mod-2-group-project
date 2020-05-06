@@ -1,7 +1,3 @@
-* {
-  font-family: 'Fauna One', serif;
-}
-
 #title {
   text-align: center;
   font-family: 'Inconsolata', monospace;
@@ -26,13 +22,17 @@ nav ul a li {
   list-style: none;
   display: inline-flex;
   padding: 10px 10px;
-  box-shadow: 3px 3px rgb(200, 005, 005);
+  box-shadow: 3px 3px rgba(17, 59, 4, 0.897);
   border-radius: 3px;
-  background-color: rgba(0, 0, 204, 0.897);
+  background-color: rgba(83, 228, 39, 0.897);
+  color: black;
+  margin-right: 5px;
 }
 
 nav {
   border: 1px solid black;
+  border-top: 1px dashed white;
+  border-bottom: 1px dashed white;
 }
 
 
@@ -47,33 +47,109 @@ nav ul a li {
 
 /* Hovering over the nav bar */
 nav ul a li:hover {
-  background-color: rgba(200, 5, 5, 0.9);
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 3px 3px rgb(195, 192, 0);
   transition: linear 0.2s;
+  box-shadow: none;
+  background-color: rgba(17, 59, 4, 1);
+  color: rgba(58, 212, 11, 0.897);
 }
 
 #jokes-container {
-  border: 1px dashed red;
-  text-align: center;
+  border: 1px dashed white;
+  text-align: left;
   margin: 10px 30px 15px 30px;
+  padding: 10px 20px;
 }
 
-#joke-category-value {
-  color: rgb(100, 100, 100);
+#jokes-container div.displayed-joke {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-left: 10px;
+  padding: 20px 0px;
+  border-bottom: 1px solid gray;
+}
+
+.joke-category {
+  color: yellow;
+}
+
+#jokes-container div p {
+  padding-right: 20px;
+  color: rgba(58, 212, 11, 0.897);
+  margin-bottom: 0px;
+}
+
+#jokes-container form {
+  text-align: right;
+  background-color: #000000;
+}
+
+.rating {
+  font-size: 1.1em;
+}
+
+
+
+.btn {
+  padding: 10px;
+}
+
+#joke-author-container {
+  margin-top: 10px;
+}
+
+#joke-category-value,
+#joke-author-value {
+  color: rgba(83, 228, 39, 0.897);
 }
 
 .category,
 .author {
   display: inline-block;
   padding: 10px 15px;
-  background-color: blue;
+  background-color: rgba(83, 228, 39, 0.897);
+  color: black;
   border-radius: 5px;
   margin-right: 10px;
-  color: white;
   font-size: 0.8em;
 }
 
+.category:hover,
+.author:hover {
+  background-color: rgba(17, 59, 4, 1);
+  color: rgba(58, 212, 11, 0.897);
+  transition: linear 0.2s;
+
+}
+
 .current-filter {
-  background-color: purple;
+  background-color: white;
+  color: black;
+}
+
+#joke-setup,
+#joke-punch {
+  color: rgba(83, 228, 39, 0.897);
+}
+
+#query-jokes {
+  margin: 20px 20px;
+}
+
+/* The page header */
+main h2 {
+  text-align: center;
+}
+
+div.displayed-joke div p b {
+  color: white;
+  font-weight: 500;
+}
+
+body,
+input {
+  font-family: 'Fira Mono', monospace;
+  font-weight: 400;
+  background-color: black;
+  color: white;
 }
