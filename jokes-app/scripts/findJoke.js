@@ -70,6 +70,8 @@ function filterJokes(event) {
       }
     } else if (filter == "category") {
       const elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
+      console.log(`elementCategory: ${elementCategory}`)
+      console.log(`filterValue: ${filterValue}`)
       if (elementCategory != filterValue) {
         displayedJokes[i].remove();
       }
@@ -104,7 +106,7 @@ function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
 // returns the joke category from the div element containing a joke 
 // by parsing its DOM nodes 
 function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
-  const text = HTMLDiv.childNodes[0].childNodes[0].innerText;
+  const text = HTMLDiv.childNodes[2].innerText;
   let output = text.slice(10, text.length);
   return output;
 }
@@ -113,7 +115,10 @@ function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
 
 function renderJokes() {
   const jokesContainer = document.querySelector('#jokes-container');
+
+  // remove any dsiplayed jokes to avoid duplication 
   jokesContainer.childNodes.forEach(node => node.remove());
+
   JOKES.forEach(j => {
     const container = document.createElement('div');
     container.classList.add('displayed-joke')
