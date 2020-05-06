@@ -117,9 +117,6 @@ function renderJokes() {
   JOKES.forEach(j => {
     const container = document.createElement('div');
     container.classList.add('displayed-joke')
-    const category = document.createElement('div')
-    category.innerHTML = `<p class='joke-category'><b>Category: </b>${j.category}</p>`;
-    container.appendChild(category);
 
     const setup = document.createElement('div');
     setup.innerHTML = `<p class='joke-setup'><b>Setup: </b>${j.setup}</p>`;
@@ -128,6 +125,10 @@ function renderJokes() {
     const punchline = document.createElement('div');
     punchline.innerHTML = `<p class='joke-punchline'><b>Punchline: </b>${j.punchline}</p>`
     container.appendChild(punchline);
+    const category = document.createElement('div')
+    category.innerHTML = `<p class='joke-category'><b>Category: </b>${j.category}</p>`;
+    container.appendChild(category);
+
 
     const ratingForm = createRatingForJoke(j);
     container.appendChild(ratingForm);
@@ -144,7 +145,7 @@ function createRatingForJoke(joke) {
   const form = document.createElement('form');
   form.action = "http://localhost:3000/ratings";
   form.method = "POST";
-  form.innerHTML = `<label for="rating">Rate This Joke</label>
+  form.innerHTML = `<label for="rating">Rate This Joke (1-5)</label>
   <input min="1" max="5" type="number" name="rating" class="rating" for="rating" " />
   <input type="hidden" name="joke_id" value="${joke.id}"> 
   <input class='btn' type="submit" value="Click Here!">`;
