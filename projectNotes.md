@@ -10,3 +10,7 @@
 [] Submit a funny 
   [] create a new joke and link to existing author 
   [] create a new joke and associated with new author (two create statements)
+[] About Page 
+  [] has authors 
+  [] has information sources 
+  [] list technologies used 
