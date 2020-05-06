@@ -3,6 +3,7 @@ class JokesController < ApplicationController
     @jokes = Joke.all 
     render json: @jokes, include: [:ratings, :author]
   end 
+
   def show 
     if params[:id]
       @joke = Joke.find(params[:id])
@@ -11,18 +12,25 @@ class JokesController < ApplicationController
       index() 
     end 
   end 
+
   def create 
     if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
-      @new_joke = Joke.new(setup: params[:setup], punchline: params[:punchline], category: params[:category], author_id: params[:author_id])
+      @new_joke = Joke.new(
+        setup: params[:setup],
+        punchline: params[:punchline],
+        category: params[:category],
+        author_id: Author.find_or_create_by(name: params[:author_id]).id
+        )
       if @new_joke.save
-        render json: @joke 
+        redirect_to "http://localhost:3001" 
       else 
-        render text: "Save failed"
+        render status: 422
       end 
     else
-      render text: "Invalid number of arguments+"
+      render status:422
     end 
   end 
+
   def update 
     if params[:id] 
       if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
