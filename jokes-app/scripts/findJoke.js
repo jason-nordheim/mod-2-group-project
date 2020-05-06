@@ -55,8 +55,6 @@ function filterJokes(event) {
   // perform the filter 
   let filter = event.target.classList[0]; // either "author" or "category "
   let filterValue = event.target.innerText;
-  console.log('filter == ', filter)
-  console.log('filterValue == ', filterValue)
   const displayedJokes = document.getElementsByClassName('displayed-joke');
   const relatedAuthor = AUTHORS.find(a => a.name == filterValue);
   let i = displayedJokes.length - 1;
@@ -70,8 +68,6 @@ function filterJokes(event) {
       }
     } else if (filter == "category") {
       const elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
-      console.log(`elementCategory: ${elementCategory}`)
-      console.log(`filterValue: ${filterValue}`)
       if (elementCategory != filterValue) {
         displayedJokes[i].remove();
       }
