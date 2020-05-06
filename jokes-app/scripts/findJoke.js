@@ -23,12 +23,12 @@ async function cacheJokes() {
 }
 
 
-function renderFilterSubmitButton() {
-  const button = document.createElement("button");
-  button.addEventListener('onclick', filterByAuthorAndCategory);
-  button.innerText = "Filter";
-  queryJokesForm.appendChild(button);
-}
+// function renderFilterSubmitButton() {
+//   const button = document.createElement("button");
+//   button.addEventListener('onclick', filterByAuthorAndCategory);
+//   button.innerText = "Filter";
+//   queryJokesForm.appendChild(button);
+// }
 
 function renderAuthors() {
   const ul = document.createElement('ul');
@@ -42,7 +42,7 @@ function renderAuthors() {
     li.innerText = `${a.name}`;
     ul.appendChild(li);
   })
-  const filterSection = document.querySelector('#filter');
+  const filterSection = document.querySelector('#authors');
   filterSection.appendChild(h3)
   filterSection.appendChild(ul);
 }
@@ -162,7 +162,7 @@ function renderCategories() {
     li.innerText = c
     ul.appendChild(li);
   })
-  const filterSection = document.querySelector('#filter');
+  const filterSection = document.querySelector('#categories');
   filterSection.appendChild(h3)
   filterSection.appendChild(ul);
 }
