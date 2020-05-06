@@ -22,12 +22,12 @@ class JokesController < ApplicationController
         author_id: Author.find_or_create_by(name: params[:author_id]).id
         )
       if @new_joke.save
-        render json: @joke 
+        redirect_to "http://localhost:3001" 
       else 
-        render text: "Save failed"
+        render status: 422
       end 
     else
-      render text: "Invalid number of arguments+"
+      render status:422
     end 
   end 
 
