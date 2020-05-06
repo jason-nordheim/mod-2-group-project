@@ -30,13 +30,6 @@ function renderFilterSubmitButton() {
   queryJokesForm.appendChild(button);
 }
 
-function filterByAuthorAndCategory() {
-  console.log('hello')
-  // get the category
-  // get the author 
-  // filter our the jokes that don't meet that criteria 
-}
-
 function renderAuthors() {
   const ul = document.createElement('ul');
   const h3 = document.createElement('h3');
@@ -54,16 +47,72 @@ function renderAuthors() {
   filterSection.appendChild(ul);
 }
 
-function filterJokes() {
+function filterJokes(event) {
+  // re-render jokes 
+  renderJokes();
+  // perform the filter 
+  let filter = event.target.classList[0]; // either "author" or "category "
+  let filterValue = event.target.innerText;
   const displayedJokes = document.getElementsByClassName('displayed-joke');
-  console.log(displayedJokes);
+  const relatedAuthor = AUTHORS.find(a => a.name == filterValue);
+  let i = displayedJokes.length - 1;
+  while (i > -1) {
+    if (filter == "author") {
+      // todo 
+      // 1) get joke id from nested form '
+      const joke_id = getJokeIdFromDisplayedJokeDiv(displayedJokes[i])
+      // 2) find related author 
+      const related_joke_ids = JOKES.filter(joke => joke.author_id == relatedAuthor.id);
+      const isRelated = related_joke_ids.find(jokeID => joke_id)
+      if (isRelated == undefined) {
+        displayedJokes[i].remove();
+      }
+      // 3) find all the jokes related to that author 
+      // 4) remove any jokes that are not part of that data set 
+    } else if (filter == "category") {
+      let elementCategory = getJokeCategoryFroDisplayedJokeDiv(displayedJokes[i])
+      if (elementCategory != filterValue) {
+        displayedJokes[i].remove();
+      }
+    }
+    i--;
+  }
+  setFilterClass(event.target)
 }
 
+function setFilterClass(sourceElement) {
+  removeAnySetFilterClass();
+  sourceElement.classList.add('current-filter');
+}
+
+function removeAnySetFilterClass() {
+  const authors = document.getElementsByClassName('author');
+  for (let i = 0; i < authors.length; i++) {
+    const element = authors[i];
+    element.classList.remove('current-filter');
+  }
+
+  const categories = document.getElementsByClassName('category');
+  for (let i = 0; i < categories.length; i++) {
+    const element = categories[i];
+    element.classList.remove('current-filter')
+  }
+}
+
+function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
+  return HTMLDiv.childNodes[3].childNodes[4].value;
+}
+
+function getJokeCategoryFroDisplayedJokeDiv(HTMLDiv) {
+  return HTMLDiv.childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerText;
+}
+
+
+
 function renderJokes() {
-  console.log('jokes', JOKES)
   const jokesContainer = document.querySelector('#jokes-container');
+  jokesContainer.childNodes.forEach(node => node.remove());
   JOKES.forEach(j => {
-    console.log("j", j)
     const container = document.createElement('div');
     container.classList.add('displayed-joke')
     const category = document.createElement('div')
@@ -84,6 +133,10 @@ function renderJokes() {
     jokesContainer.appendChild(container);
   })
 }
+
+
+
+
 
 function createRatingForJoke(joke) {
   const form = document.createElement('form');
