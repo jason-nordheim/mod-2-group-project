@@ -43,6 +43,7 @@ nav ul a li {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 /* Hovering over the nav bar */
@@ -94,6 +95,10 @@ nav ul a li:hover {
   padding: 10px;
 }
 
+#author-title {
+  font-weight: 400;
+}
+
 #joke-author-container {
   margin-top: 10px;
 }
@@ -111,6 +116,7 @@ nav ul a li:hover {
   color: black;
   border-radius: 5px;
   margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 0.8em;
 }
 
@@ -130,6 +136,12 @@ nav ul a li:hover {
 #joke-setup,
 #joke-punch {
   color: rgba(83, 228, 39, 0.897);
+}
+
+#joke-setup b,
+#joke-punch b {
+  color: white;
+  font-weight: 400;
 }
 
 #query-jokes {
