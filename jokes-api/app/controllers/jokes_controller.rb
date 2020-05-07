@@ -56,5 +56,7 @@ class JokesController < ApplicationController
     @joke = Joke.find(params[:id])
     @joke.ratings.destroy_all
     @joke.destroy
+
+    redirect_to "http://localhost:3001/admin.html"
   end
 end
