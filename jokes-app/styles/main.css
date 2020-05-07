@@ -94,6 +94,10 @@ nav ul a li:hover {
   padding: 10px;
 }
 
+#author-title {
+  font-weight: 400;
+}
+
 #joke-author-container {
   margin-top: 10px;
 }
@@ -130,6 +134,12 @@ nav ul a li:hover {
 #joke-setup,
 #joke-punch {
   color: rgba(83, 228, 39, 0.897);
+}
+
+#joke-setup b,
+#joke-punch b {
+  color: white;
+  font-weight: 400;
 }
 
 #query-jokes {
