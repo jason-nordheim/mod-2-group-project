@@ -1,13 +1,14 @@
 # Joke.destroy_all
 # Author.destroy_all
 
-david = Author.create(name: 'David Katz')
+unknown = Author.create(name: 'David Katz')
 jared = Author.create(name: 'Jared Stromberg')
 dad = Author.create(name: "Dad")
 brad = Author.create(name: "Bradley Haley")
 tina = Author.create(name: "Tina Fey")
 readersDigest = Author.create(name: "Reader's Digest") # https://www.rd.com/jokes/one-liners/
 jason = Author.create(name: "Jason") 
+ashley = Author.create(name: "Ashley")
 
 j1 = Joke.create(
     category: "general", 
@@ -363,7 +364,25 @@ j55 = Joke.create(
 )
 j56 = Joke.create(
     category: "sports", 
-    setup: "Why did the woman break up with the tennis pro?", 
-    punchline: "Because love meant nothing to him", 
-    author_id: unknown.id 
+    setup: "Why should you never date a tennis player?", 
+    punchline: "Because to them, love means 'nothing'", 
+    author_id: ashley.id 
 )
+
+
+Rating.create(rating: 4, joke_id: j30.id)
+Rating.create(rating: 2, joke_id: j50.id)
+Rating.create(rating: 4, joke_id: j1.id)
+Rating.create(rating: 3, joke_id: j32.id)
+Rating.create(rating: 2, joke_id: j22.id)
+Rating.create(rating: 1, joke_id: j10.id)
+Rating.create(rating: 4, joke_id: j1.id)
+Rating.create(rating: 3, joke_id: j3.id)
+Rating.create(rating: 2, joke_id: j2.id)
+Rating.create(rating: 5, joke_id: j4.id)
+Rating.create(rating: 2, joke_id: j18.id)
+Rating.create(rating: 3, joke_id: j9.id)
+Rating.create(rating: 4, joke_id: j8.id)
+Rating.create(rating: 5, joke_id: j10.id)
+Rating.create(rating: 2, joke_id: j6.id)
+Rating.create(rating: 1, joke_id: j2.id)
