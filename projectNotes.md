@@ -13,6 +13,9 @@
   [x] create a new joke and associated with new author (two create statements)
 [] About Page 
   [x] has authors 
+  [x] has information sources --- AW 
+    - DadJokes 
+  [x] list technologies used --- AW 
   [] has information sources --- AW 
     - DadJokes 
   [] list technologies used --- AW 
@@ -22,5 +25,6 @@
     - JavaScript API Calls using fetch 
     - CSS styling 
 [] Admin Page 
+  [x] html and js files created and linked to about page
   [] remove joke 
   [] update joke 
