@@ -43,6 +43,7 @@ nav ul a li {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 /* Hovering over the nav bar */
