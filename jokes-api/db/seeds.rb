@@ -1,5 +1,5 @@
-Joke.destroy_all
-Author.destroy_all
+# Joke.destroy_all
+# Author.destroy_all
 
 unknown = Author.create(name: 'David Katz')
 jared = Author.create(name: 'Jared Stromberg')
@@ -13,8 +13,30 @@ j1 = Joke.create(
     category: "general", 
     setup: 'What did Michael Jackson name his denim store?',
     punchline: 'Billy Jeans', 
-    author_id: unknown.id 
-) 
+    author_id: unknown.id)
+Joke.create(
+  category: "technology",
+  etup: "What do you call a computer floating in the ocean?",
+  punchline: "A Dell rolling in the deep",
+  author_id: tina.id)
+Joke.create(
+  category: "pop culture",
+  setup: "What do you call a ride sharing app that serves breakfast?",
+  punchline: "Eggs Uber Easy",
+  author_id: jared.id)
+Joke.create(category: "technology",å
+  setup: "Why are PCs like air-conditioners",
+  punchline: "They stop working properly if you open windows",
+  author_id: brad.id)
+Joke.create(
+  category: "Animals",
+  setup: "Why are there no grizzlies in Arizona?",
+  punchline: "Because the heat is unbearable.",
+  author_id: jared.id)
+Joke.create(category: "Food",
+    setup: "Did you hear about the angry pancake?",
+    punchline: "It totally flipped!",
+    author_id: brad.id)
 j2 = Joke.create(
     category: "technology",
     setup: "What do you call a computer floating in the ocean?", 

@@ -38,6 +38,7 @@ class JokesController < ApplicationController
         @joke.setup  = params[:setup]
         @joke.punchline = params[:punchline]
         @joke.category = params[:category]
+        @joke.author_id = Author.find_or_create_by(name: params[:author_id]).id
         if @joke.save 
           render json: @joke
         else
@@ -50,4 +51,10 @@ class JokesController < ApplicationController
       render text: 'ID is required to update a joke value' 
     end 
   end 
+
+  def destroy
+    @joke = Joke.find(params[:id])
+    @joke.ratings.destroy_all
+    @joke.destroy
+  end
 end

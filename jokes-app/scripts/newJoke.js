@@ -1,18 +1,26 @@
-const jokeCategories = ["general", "pop culture", "technology", "nature", "food", "sports" ]
+const jokeCategories = []
 const categoryOptions = document.querySelector('#category-options')
 const jokeAttributes = ["setup", "punchline"]
 const jokeForm = document.querySelector('#joke-form')
 
+fetch('http://localhost:3000/jokes')
+    .then(response => response.json())
+    .then(getCategories)
+
 fetch('http://localhost:3000/authors')
     .then(response => response.json())
-    .then(authors => {
-        createCategoryOptions();
-        createForm();
-    })
-    
+    .then(createForm)
 
-function getCategories() {
-
+function getCategories(jokes) {
+    jokes.forEach(joke => {
+        if (jokeCategories.includes(joke.category)) {
+            
+        } else {
+            jokeCategories.push(joke.category)
+        }
+    });
+    createCategoryOptions();
+    console.log(jokeCategories)
 }
 
 function createCategoryOptions () {
