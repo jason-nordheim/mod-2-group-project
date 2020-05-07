@@ -165,7 +165,12 @@ function findJokeAuthor(joke) {
 }
 
 
-
+function createRemoveButton(joke){
+  const form = document.createElement('div');
+  const btn = document.createElement('button')
+  btn.value = 'detele joke'; 
+  btn.onclick = deleteJoke()
+}
 
 
 function createRatingForJoke(joke) {

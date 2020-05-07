@@ -361,4 +361,9 @@ j55 = Joke.create(
     punchline: "If you don't pay a ridiculous amount of money, they'll send your child back.", 
     author_id: unknown.id
 )
-
+j56 = Joke.create(
+    category: "sports", 
+    setup: "Why did the woman break up with the tennis pro?", 
+    punchline: "Because love meant nothing to him", 
+    author_id: unknown.id 
+)
