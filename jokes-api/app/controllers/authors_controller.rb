@@ -28,10 +28,10 @@ class AuthorsController < ApplicationController
       if @author.save
         render json: @author
       else
-        render text: "Failed to update Author"
+        render status: 422
       end
     else
-      render text: "ID required to update Author"
+      render status: 422
     end
   end 
 
