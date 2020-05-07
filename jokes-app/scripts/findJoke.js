@@ -36,6 +36,7 @@ function renderAuthors() {
   const ul = document.createElement('ul');
   const h3 = document.createElement('h3');
   h3.innerText = 'Filter Authors:';
+  h3.onclick = resetFiltering;
   AUTHORS.forEach(a => {
     const li = document.createElement('li');
     li.onclick = filterJokes;
@@ -78,6 +79,11 @@ function filterJokes(event) {
     }
     i--;
   }
+}
+
+function resetFiltering() {
+  removeAnySetFilterClass();
+  renderJokes();
 }
 
 function setFilterClass(sourceElement) {
@@ -177,6 +183,7 @@ function renderCategories() {
   const ul = document.createElement('ul');
   const h3 = document.createElement('h3');
   h3.innerText = 'Filter Categories:';
+  h3.onclick = resetFiltering;
   const uniqueCategories = makeUnique(JOKES.map(j => j.category))
   uniqueCategories.forEach(c => {
     const li = document.createElement('li');
