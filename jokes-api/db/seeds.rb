@@ -8,6 +8,7 @@ brad = Author.create(name: "Bradley Haley")
 tina = Author.create(name: "Tina Fey")
 readersDigest = Author.create(name: "Reader's Digest") # https://www.rd.com/jokes/one-liners/
 jason = Author.create(name: "Jason") 
+ashley = Author.create(name: "Ashley")
 
 j1 = Joke.create(
     category: "general", 
@@ -361,6 +362,13 @@ j55 = Joke.create(
     punchline: "If you don't pay a ridiculous amount of money, they'll send your child back.", 
     author_id: unknown.id
 )
+j56 = Joke.create(
+    category: "sports", 
+    setup: "Why should you never date a tennis player?", 
+    punchline: "Because to them, love means 'nothing'", 
+    author_id: ashley.id 
+)
+
 
 Rating.create(rating: 4, joke_id: j30.id)
 Rating.create(rating: 2, joke_id: j50.id)
