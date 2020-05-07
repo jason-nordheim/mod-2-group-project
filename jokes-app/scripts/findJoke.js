@@ -4,8 +4,8 @@ let AUTHORS = [];
 
 // get data 
 document.addEventListener('DOMContentLoaded', (event) => {
-  cacheJokes()
-    .then(cacheAuthors)
+  cacheAuthors()
+    .then(cacheJokes)
     .then(renderCategories)
     .then(renderAuthors)
     .then(renderJokes);
@@ -15,11 +15,13 @@ async function cacheAuthors() {
   await fetch('http://localhost:3000/authors')
     .then(response => response.json())
     .then((a) => AUTHORS = a)
+  console.log(`Authors cached (${AUTHORS.length}):\n ${JSON.stringify(AUTHORS)}`)
 }
 async function cacheJokes() {
   await fetch('http://localhost:3000/jokes')
     .then(response => response.json())
     .then((j) => JOKES = j)
+  console.log(`JOKES cached (${JOKES.length}):\n ${JSON.stringify(JOKES)}`)
 }
 
 
@@ -34,6 +36,7 @@ function renderAuthors() {
   const ul = document.createElement('ul');
   const h3 = document.createElement('h3');
   h3.innerText = 'Filter Authors:';
+  h3.onclick = resetFiltering;
   AUTHORS.forEach(a => {
     const li = document.createElement('li');
     li.onclick = filterJokes;
@@ -60,10 +63,12 @@ function filterJokes(event) {
   let i = displayedJokes.length - 1;
   while (i > -1) {
     if (filter == "author") {
-      const joke_id = getJokeIdFromDisplayedJokeDiv(displayedJokes[i])
-      const related_joke_ids = JOKES.filter(joke => joke.author_id == relatedAuthor.id);
-      const isRelated = related_joke_ids.find(jokeID => joke_id)
-      if (isRelated == undefined) {
+      //console.log(`filterValue: ${filterValue}`)
+      const author = getJokeAuthorFromDisplayedDiv(displayedJokes[i])
+      // console.log(`filterValue: ${filterValue}`)
+      // console.log(`authro: ${author}`)
+      // console.log(`should remove: ${author == filterValue}`)
+      if (author != filterValue) {
         displayedJokes[i].remove();
       }
     } else if (filter == "category") {
@@ -74,6 +79,11 @@ function filterJokes(event) {
     }
     i--;
   }
+}
+
+function resetFiltering() {
+  removeAnySetFilterClass();
+  renderJokes();
 }
 
 function setFilterClass(sourceElement) {
@@ -95,8 +105,9 @@ function removeAnySetFilterClass() {
   }
 }
 
-function getJokeIdFromDisplayedJokeDiv(HTMLDiv) {
-  return HTMLDiv.childNodes[3].childNodes[4].value;
+function getJokeAuthorFromDisplayedDiv(HTMLDiv) {
+  const output = HTMLDiv.childNodes[3].innerText;
+  return output.slice(8, output.length);
 }
 
 // returns the joke category from the div element containing a joke 
@@ -119,23 +130,38 @@ function renderJokes() {
     const container = document.createElement('div');
     container.classList.add('displayed-joke')
 
-    const setup = document.createElement('div');
-    setup.innerHTML = `<p class='joke-setup'><b>Setup: </b>${j.setup}</p>`;
-    container.appendChild(setup);
+    const setupDiv = document.createElement('div');
+    setupDiv.innerHTML = `<p class='joke-setup'><b>Setup: </b>${j.setup}</p>`;
+    container.appendChild(setupDiv);
 
     const punchline = document.createElement('div');
     punchline.innerHTML = `<p class='joke-punchline'><b>Punchline: </b>${j.punchline}</p>`
     container.appendChild(punchline);
-    const category = document.createElement('div')
-    category.innerHTML = `<p class='joke-category'><b>Category: </b>${j.category}</p>`;
-    container.appendChild(category);
 
+    const categoryDiv = document.createElement('div')
+    categoryDiv.innerHTML = `<p class='joke-category'><b>Category: </b>${j.category}</p>`;
+    container.appendChild(categoryDiv);
+
+    const author = findJokeAuthor(j);
+    const authorDiv = document.createElement('div')
+    authorDiv.innerHTML = `<p class='joke-author'><b>Author: </b>${author.name}</p>`;
+    container.appendChild(authorDiv)
 
     const ratingForm = createRatingForJoke(j);
     container.appendChild(ratingForm);
 
     jokesContainer.appendChild(container);
   })
+}
+
+
+function findJokeAuthor(joke) {
+  //console.log(`Find Author of Joke: ${JSON.stringify(joke)}`);
+  let authorID = joke.author_id;
+  //console.log(`Author ID: ${authorID}`);
+  let result = AUTHORS.find(a => a.id == joke.author_id)
+  //console.log(`Result: ${result}`)
+  return result;
 }
 
 
@@ -157,6 +183,7 @@ function renderCategories() {
   const ul = document.createElement('ul');
   const h3 = document.createElement('h3');
   h3.innerText = 'Filter Categories:';
+  h3.onclick = resetFiltering;
   const uniqueCategories = makeUnique(JOKES.map(j => j.category))
   uniqueCategories.forEach(c => {
     const li = document.createElement('li');
