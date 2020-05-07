@@ -2,15 +2,26 @@
 # Deliverables 
 
 [x] Home page displays random joke
-  [] Rate joke from home page 
+  [x] Rate joke from home page
+  [] fix coloring of text (setup/punchline) --- JN
 [x] Find & rate
-  [x] filter jokes by author 
-  [x] filter jokes by category 
+  [] filter jokes by author --- JN
+  [] filter jokes by category --- JN 
   [x] rate a displayed joke 
-[] Submit a funny 
-  [] create a new joke and link to existing author 
-  [] create a new joke and associated with new author (two create statements)
+[x] Submit a funny 
+  [x] create a new joke and link to existing author 
+  [x] create a new joke and associated with new author (two create statements)
 [] About Page 
-  [] has authors 
-  [] has information sources 
-  [] list technologies used 
+  [x] has authors 
+  [x] has information sources --- AW 
+    - DadJokes 
+  [x] list technologies used --- AW 
+    - Rails API (Rails 6 / Ruby) 
+    - HTTP requests (GET/POST/UPDATE/PUT/DELETE)
+    - JavaScript DOM Manipulation 
+    - JavaScript API Calls using fetch 
+    - CSS styling 
+[] Admin Page 
+  [x] html and js files created and linked to about page
+  [] remove joke 
+  [] update joke 

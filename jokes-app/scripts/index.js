@@ -16,8 +16,6 @@ function selectRandomJoke(jokes) {
 function displayRandomJoke(joke) {
     const categoryValue = document.querySelector('#joke-category-value')
     const authorValue = document.querySelector('#joke-author-value')
-
-    console.log(joke)
     categoryValue.innerText = joke.category
     authorValue.innerText = joke.author.name
     jokeSetup.innerHTML = `<b>Setup: </b>${joke.setup}`
