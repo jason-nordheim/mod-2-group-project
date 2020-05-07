@@ -3,7 +3,7 @@
 
 [x] Home page displays random joke
   [x] Rate joke from home page
-  [] fix coloring of text (setup/punchline) --- JN
+  [x] fix coloring of text (setup/punchline) --- JN
 [x] Find & rate
   [] filter jokes by author --- JN
   [] filter jokes by category --- JN 

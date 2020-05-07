@@ -116,6 +116,7 @@ nav ul a li:hover {
   color: black;
   border-radius: 5px;
   margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 0.8em;
 }
 
