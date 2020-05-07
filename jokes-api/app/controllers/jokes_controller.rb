@@ -16,9 +16,9 @@ class JokesController < ApplicationController
   def create 
     if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
       @new_joke = Joke.new(
+        category: params[:category],
         setup: params[:setup],
         punchline: params[:punchline],
-        category: params[:category],
         author_id: Author.find_or_create_by(name: params[:author_id]).id
         )
       if @new_joke.save

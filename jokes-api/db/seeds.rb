@@ -1,8 +1,10 @@
+Joke.destroy_all
+Author.destroy_all
 
-unknown = Author.create(name: 'Unknown')
-colbert = Author.create(name: 'Steven Colbert')
+david = Author.create(name: 'David Katz')
+jared = Author.create(name: 'Jared Stromberg')
 dad = Author.create(name: "Dad")
-george = Author.create(name: "George Carlin")
+brad = Author.create(name: "Bradley Haley")
 tina = Author.create(name: "Tina Fey")
 readersDigest = Author.create(name: "Reader's Digest") # https://www.rd.com/jokes/one-liners/
 jason = Author.create(name: "Jason") 
@@ -339,13 +341,4 @@ j55 = Joke.create(
 )
 
 
-# request RandomJokeApi.get ("https://official-joke-api.appspot.com/random_ten")
-# jokes = JSON.parse(request)
 
-# jokes.each do |joke|
-#     Joke.find_or_create_by(setup: "joke['setup']") do |joke|
-#         joke.category = joke['type'],
-#         joke.punchline = joke['punchline']
-#         joke.author_id = rand((Author.all.length)-1)+1
-#     end
-# end
