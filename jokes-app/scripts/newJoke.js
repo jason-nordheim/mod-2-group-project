@@ -3,17 +3,13 @@ const categoryOptions = document.querySelector('#category-options')
 const jokeAttributes = ["setup", "punchline"]
 const jokeForm = document.querySelector('#joke-form')
 
-fetch('http://localhost:3000/authors')
-    .then(response => response.json())
-    .then(authors => {
-        createCategoryOptions();
-        createForm();
-    })
-    
 fetch('http://localhost:3000/jokes')
     .then(response => response.json())
     .then(getCategories)
 
+fetch('http://localhost:3000/authors')
+    .then(response => response.json())
+    .then(createForm)
 
 function getCategories(jokes) {
     jokes.forEach(joke => {
@@ -23,6 +19,7 @@ function getCategories(jokes) {
             jokeCategories.push(joke.category)
         }
     });
+    createCategoryOptions();
     console.log(jokeCategories)
 }
 
