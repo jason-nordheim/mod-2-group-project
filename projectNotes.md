@@ -5,8 +5,8 @@
   [x] Rate joke from home page
   [x] fix coloring of text (setup/punchline) --- JN
 [x] Find & rate
-  [] filter jokes by author --- JN
-  [] filter jokes by category --- JN 
+  [x] filter jokes by author --- JN
+  [x] filter jokes by category --- JN 
   [x] rate a displayed joke 
 [x] Submit a funny 
   [x] create a new joke and link to existing author 
@@ -16,9 +16,9 @@
   [x] has information sources --- AW 
     - DadJokes 
   [x] list technologies used --- AW 
-  [] has information sources --- AW 
+  [x] has information sources --- AW 
     - DadJokes 
-  [] list technologies used --- AW 
+  [x] list technologies used --- AW 
     - Rails API (Rails 6 / Ruby) 
     - HTTP requests (GET/POST/UPDATE/PUT/DELETE)
     - JavaScript DOM Manipulation 

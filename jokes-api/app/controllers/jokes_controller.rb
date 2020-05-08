@@ -32,24 +32,18 @@ class JokesController < ApplicationController
   end 
 
   def update 
-    if params[:id] 
-      if params[:setup] && params[:punchline] && params[:category] && params[:author_id]
-        @joke = Joke.find(params[:id])
-        @joke.setup  = params[:setup]
-        @joke.punchline = params[:punchline]
-        @joke.category = params[:category]
-        @joke.author_id = Author.find_or_create_by(name: params[:author_id]).id
+    @joke = Joke.find(params[:id])
+      if @joke.update(
+        setup: params[:setup],
+        punchline: params[:punchline],
+        category: params[:category],
+        author_id: Author.find_or_create_by(name: params[:author_id]).id)
         if @joke.save 
-          render json: @joke
+          redirect_to "http://localhost:3001/admin.html"
         else
-          render text: "Failed to update Joke"
+          render status: 422
         end 
-      else 
-        render text: "Setup, Punchline, and Category are all required to update a jokes value"
-      end 
-    else
-      render text: 'ID is required to update a joke value' 
-    end 
+      end
   end 
 
   def destroy
