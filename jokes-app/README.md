@@ -43,21 +43,25 @@ In the root of the front-end directory is the HTML pages that serve the various 
 ```
 
 ### Home 
+![IMAGE ALT TEXT HERE](/jokes-app/img/index.png "Home Page")
 The home page serves primarily as a simple entryway to the web application. It links to the various features and functionality of the page. When loading the `index.html` or homepage, the `index.js` script associated with that page, will reach out to the API and retrieve a random joke and then render that joke to the page. 
 
 ### Find and Rate 
+![IMAGE ALT TEXT HERE](/jokes-app/img/findRate.png "Find and Rate Page")
 The `findJoke.html`, servees as a place where visitors of "Funny's from behind the keybaord" can look for a joke they've seen before. Along the top of the page are a series of buttons (rendered as `li` elements), which will filter the jokes displayed on the page by either the joke `category` or the joke's `author`. This will also enable end-users to add a rating to the joke. 
 
 ### Submit a funny 
-
+![IMAGE ALT TEXT HERE](/jokes-app/img/new.png "Submit New Joke Page")
 This form allows end-users of "Funny's from behind the keyboard" to tell us (or rather the application) about a joke that they really like, which would get added to the applications database via the backend API so that other visitors of "Funny's from behind the keyboard" can enjoy even more great jokes. 
 
 ### About 
+![IMAGE ALT TEXT HERE](/jokes-app/img/about.png "About Page")
 The `about.html` describes how the site as a whole and breifly introduces the developers responsible for it's creation. Here we have outlined the basic technologies used and given a breif (and fun) description of the people responsible for helping this project come to fruition. 
 
 At the very bottom, purposely obscured, is the link to the admin interface (`admin.html`), which provides a way of performing our administrative functions. 
 
 ### Admin 
+![IMAGE ALT TEXT HERE](/jokes-app/img/admin.png "Admin Page")
 The admin page allows for managing the jokes in the database through a friendly GUI. Here administrators have the ability to update or remove any jokes from the applications database. 
 
 # Future features
