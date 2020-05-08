@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Jokes Page</title>
+  <title>Submit a funny</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fauna+One&display=swap" rel="stylesheet">
@@ -15,32 +15,30 @@
   <header>
     <h1 id="title">Funnys from behind the keyboard</h1>
     <nav>
-        <ul>
-            <!-- Will (by default) display a random joke pulled from API -->
-            <a href="./index.html">
-                <li>Home</li>
-            </a>
-            <!-- provides interface for retrieving a joke and rating a joke-->
-            <a href="./findJoke.html">
-                <li>Find &amp; Rate</li>
-            </a>
-            <!-- Will allow users to enter a new joke -->
-            <a href="./newJoke.html">
-                <li>Submit a funny</li>
-            </a>
-            <a href="./about.html">
-                <li>About</li>
-            </a>
-        </ul>
+      <ul>
+        <!-- Will (by default) display a random joke pulled from API -->
+        <a href="./index.html">
+          <li>Home</li>
+        </a>
+        <!-- provides interface for retrieving a joke and rating a joke-->
+        <a href="./findJoke.html">
+          <li>Find &amp; Rate</li>
+        </a>
+        <!-- Will allow users to enter a new joke -->
+        <a href="./newJoke.html">
+          <li>Submit a funny</li>
+        </a>
+        <a href="./about.html">
+          <li>About</li>
+        </a>
+      </ul>
     </nav>
   </header>
   <main>
     <div class="container">
       <form action="http://localhost:3000/jokes" method="POST" id="joke-form">
-
         <label for="category">Category</label>
         <select name="category" id="category-options">Category</select>
-      
       </form>
     </div>
 
