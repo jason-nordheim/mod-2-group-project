@@ -4,7 +4,7 @@ fetch("http://localhost:3000/jokes")
     .then(response => response.json())
     .then(displaySetupUpdateAndDelete)
 
-function displaySetupUpdateAndDelete(jokes){
+function displaySetupUpdateAndDelete(jokes) {
     jokes.forEach(joke => {
         displaySetup(joke.setup)
         updateCollapsible(joke)
@@ -14,7 +14,7 @@ function displaySetupUpdateAndDelete(jokes){
 }
 
 function displaySetup(setup) {
-    const li = document.createElement("li") 
+    const li = document.createElement("li")
     li.innerText = `${setup}`
     ul.appendChild(li)
 }
@@ -46,8 +46,8 @@ function updateCollapsible(joke) {
 function buildUpdateForm(joke) {
     const div = document.querySelector(`#joke${joke.id}`)
     const form = document.createElement('form')
-    
-    form.action = `http://localhost;3000/jokes/${joke.id}`
+
+    form.action = `http://localhost:3000/jokes/${joke.id}`
     form.method = "POST"
     form.innerHTML = `
         <input type="text" name="setup" id="setup" value="${joke.setup}">
@@ -59,7 +59,7 @@ function buildUpdateForm(joke) {
         `
     div.appendChild(form)
 }
-        
+
 
 function deleteJoke(id) {
     const form = document.createElement("form")
