@@ -165,3 +165,49 @@ input {
   background-color: black;
   color: white;
 }
+
+
+/* Submit Joke (newJoke.html) */
+#joke-form {
+  margin: 30px 5px 10px 30px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+#joke-form * {
+  margin: 5px 5px 5px 10px;
+  max-width: 200px;
+}
+
+#joke-form label {
+  padding-right: 10px;
+  clear: both;
+}
+
+#joke-form input {
+  padding: 5px 3px 5px 3px;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+#joke-form input#submit-btn {
+  flex: content;
+  margin-top: 40px;
+  padding: 8px 3px 8px 3px;
+  max-width: 100px;
+}
+
+#joke-form input#submit-btn:hover {
+  background-color: rgba(83, 228, 39, 0.897);
+  color: black;
+  transition: 0.1s;
+}
+
+.invalid-option {
+  border: 1px solid red;
+}
+
+.valid-option {
+  border: 1px solid green;
+}
